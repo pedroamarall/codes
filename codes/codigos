@@ -44,6 +44,9 @@ se der algum erro apos refazer o portal, fazer o passo 2 do **Subindo o portal e
 - ***g br*** (vai listar as branch's)
 ***g co 'NomeBranch'*** (vai mudar a branch)
 ***g br -D 'NomeBranch'*** (vai apagar a branch)
+***git cherry-pick 'codigo do comit'*** (adicione aqui sem as aspas o codigo do comit de outra branch para transferir para a sua atual branch)
+***git merge master*** (adiciona todas as alteracoes de comit's feitos em outras branchs e tras para a atual, diferente do g cp acima que ira trazer apenas o que voce escolher)
+***git rebase master*** (todos os comit's da master ficarao abaixo dos comits feitos por mim na atual branch)
 
 6- Depois de criar a branch, vamos manipular o teset no VScode
 
