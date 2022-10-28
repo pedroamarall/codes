@@ -18,46 +18,60 @@
 
 1- Entrando no repositorio do Portal e refazendo o catalina
 
-- ***cdt*** (ir para o repositorio liferay-portal)
-- ***ant clean*** (limpar o banco)
-***ant all*** (refazer o portal no catalina)
+- *cdt* (ir para o repositorio liferay-portal)
+- *ant clean* (limpar o banco)
+*ant all* (refazer o portal no catalina)
 
 # Observacao !!
 
-se der algum erro apos refazer o portal, fazer o passo 2 do **Subindo o portal e rodando o Banco de dados no Docker** ou utilizar o comando de [***ps aux | grep java***]. **para ver os processos em execucao e poder para-los**
+se der algum erro apos refazer o portal, fazer o passo 2 do **Subindo o portal e rodando o Banco de dados no Docker** ou utilizar o comando de [*ps aux | grep java*]. **para ver os processos em execucao e poder para-los**
 
 2- Atualizando os Repositorios Local e remoto
 
-- ***g pull upstream master*** (para atualizar os codigos no repositorio local)
-- ***g push origin master*** (para atualizar o codigo no Github)
+- *g pull upstream master* (para atualizar os codigos no repositorio local)
+- *g push origin master* (para atualizar o codigo no Github)
 
 3- Trabalhando com ticket - colocando as informacoes do jira no VScode
 
-***Boards*** aba para abrir o Kaban do **Workflow|Test Automation** com os Ticket's
+*Boards* aba para abrir o Kaban do **Workflow|Test Automation** com os Ticket's
 
 4- Criando a branch baseado no titulo do Jira
 
-***g co -b 'NomeBranch'*** (cria a branch e entra nela)
+*g co -b 'NomeBranch'* (cria a branch e entra nela)
 
 5- Comandos para manipular as branch's !!!
 
-- ***g br*** (vai listar as branch's)
-***g co 'NomeBranch'*** (vai mudar a branch)
-***g br -D 'NomeBranch'*** (vai apagar a branch)
-***git cherry-pick 'codigo do comit'*** (adicione aqui sem as aspas o codigo do comit de outra branch para transferir para a sua atual branch)
-***git merge master*** (adiciona todas as alteracoes de comit's feitos em outras branchs e tras para a atual, diferente do g cp acima que ira trazer apenas o que voce escolher)
-***git rebase master*** (todos os comit's da master ficarao abaixo dos comits feitos por mim na atual branch)
+*g br* (vai listar as branch's)
+*g co 'NomeBranch'* (vai mudar a branch)
+*g br -D 'NomeBranch'* (vai apagar a branch)
+*git cherry-pick 'codigo do comit'* (adicione aqui sem as aspas o codigo do comit de outra branch para transferir para a sua atual branch)
+*git merge master* (adiciona todas as alteracoes de comit's feitos em outras branchs e tras para a atual, diferente do g cp acima que ira trazer apenas o que voce escolher)
+*git rebase master* (todos os comit's da master ficarao abaixo dos comits feitos por mim na atual branch)
+
+`g ci -m` “aqui voce coloca qualquer texto objetivo para commitar”
+
+`g log` -> mostrar os comites feitos
+
+`gpr submit -u brianchandotcom` -> comando para o puul request e enviar o trabalho final
+
+`git reset HEAD~1` -> deleta o último commit
+
+`git fetch` -> atualiza o diretório do github
+
+`git config --global --unset github.oauth-token` -> comando que eu dei quando apareceu este erro “File git-pull-request.users could not be found. Using email names will not be available. Run the update-users command to enable this functionality Submitting pull request for pedro-my-service-builder Pushing local branch pedro-my-service-builder to origin Everything up-to-date Sending pull request to brianchandotcom/liferay-basic-training Couldn't get a response from github, going to check if the pull was submitted anyways... Could not authorize you to connect with Github. Try running "git config --global --unset github.oauth-token" and running your command again to reauthenticate
+
+*git remote add origin/upstream https://github.com/pedroamarall/my-service-builder.git* (adiciona uma nova upstream ou origin)
 
 6- Depois de criar a branch, vamos manipular o teset no VScode
 
-- ***code .*** (exucutar esse comando dentro da branch (para abrir o VScode e trabalhar o codigo))
-- ***Crtl + p*** (dar esse comando dentro do VScode e pegar nome do arquivo de .testcase e coloca na pesquisa)
-- ***Crtl + f*** (dar esse comando dentro do arquivo.testcase e encontrar o caso de teste dentro dele)
-- ***apos encontrar o caso de test*** dentro do arquivo.testcase apagar os seguintes linhas de Codigo para comecar a montar o teste
+- *code .* (exucutar esse comando dentro da branch (para abrir o VScode e trabalhar o codigo))
+- *Crtl + p* (dar esse comando dentro do VScode e pegar nome do arquivo de .testcase e coloca na pesquisa)
+- *Crtl + f* (dar esse comando dentro do arquivo.testcase e encontrar o caso de teste dentro dele)
+- *apos encontrar o caso de test* dentro do arquivo.testcase apagar os seguintes linhas de Codigo para comecar a montar o teste
 
 # Para rodar o arquivo e fazer o teste voce precisa colocar o seguinte codigo
 
-- ***ant -f build-test.xml run-selenium-test -Dtest.class=*** (apos = coloque o nome do testcase sem o .testcase + o simbolo de # e em seguida coloque o nome do teste que voce quer que seja testado)
+- *ant -f build-test.xml run-selenium-test -Dtest.class=* (apos = coloque o nome do testcase sem o .testcase + o simbolo de # e em seguida coloque o nome do teste que voce quer que seja testado)
 *ex*: ant -f build-test.xml run-selenium-test -Dtest.class=SEO#Can
 
 
@@ -75,3 +89,14 @@ se der algum erro apos refazer o portal, fazer o passo 2 do **Subindo o portal e
 5- *d start galatians*
 6- *d exec -it galatians mysql -uroot -p*
 7- *create database lportal;*
+
+# XPATH'S
+1- //a[(text()=’Conversar com vendas’)] **busca simples**
+2- //*[contains(@class,’sales w-button’)] **usando o contains no seletor de codigo de uma page**
+3- //*[@class=’contact-sales w-button’ and @href=’/contact-sales’] **usando o or ou and no seletor de codigo**
+
+# CONFIRM WITHOUT TO CLICK YES ALWAYS
+*yes | codigo que voce deseja*
+
+# DOCKER IMAGE
+*docker run -p 7777:80 lowc0ff/liferay:1.0*
